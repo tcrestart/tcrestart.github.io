@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>article title</title>
+      <link href="/2023/04/04/article-title/"/>
+      <url>/2023/04/04/article-title/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-算法"><a href="#1-算法" class="headerlink" title="1 算法"></a>1 算法</h1><p>查查NA</p><h3 id="支持"><a href="#支持" class="headerlink" title="支持"></a>支持</h3><h2 id="2-护城河"><a href="#2-护城河" class="headerlink" title="2 护城河"></a>2 护城河</h2><pre class="line-numbers language-none"><code class="language-none">#include&lt;iostream&gt;using namespace std;int main()&#123;cout&lt;&lt;&quot;hello world&quot;&lt;&lt;endl;return 0;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p>$y &#x3D; f(x)$</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

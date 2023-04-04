@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>tcrestart</title>
+  
+  
+  <link href="http://tcrestart.github.io/atom.xml" rel="self"/>
+  
+  <link href="http://tcrestart.github.io/"/>
+  <updated>2023-04-04T12:01:31.611Z</updated>
+  <id>http://tcrestart.github.io/</id>
+  
+  <author>
+    <name>tcrestart</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>article title</title>
+    <link href="http://tcrestart.github.io/2023/04/04/article-title/"/>
+    <id>http://tcrestart.github.io/2023/04/04/article-title/</id>
+    <published>2023-04-04T07:10:08.000Z</published>
+    <updated>2023-04-04T12:01:31.611Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;1-算法&quot;&gt;&lt;a href=&quot;#1-算法&quot; class=&quot;headerlink&quot; title=&quot;1 算法&quot;&gt;&lt;/a&gt;1 算法&lt;/h1&gt;&lt;p&gt;查查NA&lt;/p&gt;
+&lt;h3 id=&quot;支持&quot;&gt;&lt;a href=&quot;#支持&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="算法" scheme="http://tcrestart.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+</feed>
