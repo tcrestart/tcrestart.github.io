@@ -6,7 +6,7 @@
   <link href="http://tcrestart.github.io/atom.xml" rel="self"/>
   
   <link href="http://tcrestart.github.io/"/>
-  <updated>2023-04-04T12:01:31.611Z</updated>
+  <updated>2023-04-04T12:56:08.425Z</updated>
   <id>http://tcrestart.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://tcrestart.github.io/2023/04/04/article-title/"/>
     <id>http://tcrestart.github.io/2023/04/04/article-title/</id>
     <published>2023-04-04T07:10:08.000Z</published>
-    <updated>2023-04-04T12:01:31.611Z</updated>
+    <updated>2023-04-04T12:56:08.425Z</updated>
     
     
       
@@ -35,8 +35,12 @@
     
     
     
+    <category term="suanfa" scheme="http://tcrestart.github.io/categories/suanfa/"/>
     
-    <category term="算法" scheme="http://tcrestart.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="suanfa" scheme="http://tcrestart.github.io/tags/suanfa/"/>
+    
+    <category term="tag" scheme="http://tcrestart.github.io/tags/tag/"/>
     
   </entry>
   

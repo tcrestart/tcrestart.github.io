@@ -8,13 +8,21 @@
       <link href="/2023/04/04/article-title/"/>
       <url>/2023/04/04/article-title/</url>
       
-        <content type="html"><![CDATA[<h1 id="1-算法"><a href="#1-算法" class="headerlink" title="1 算法"></a>1 算法</h1><p>查查NA</p><h3 id="支持"><a href="#支持" class="headerlink" title="支持"></a>支持</h3><h2 id="2-护城河"><a href="#2-护城河" class="headerlink" title="2 护城河"></a>2 护城河</h2><pre class="line-numbers language-none"><code class="language-none">#include&lt;iostream&gt;using namespace std;int main()&#123;cout&lt;&lt;&quot;hello world&quot;&lt;&lt;endl;return 0;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p>$y &#x3D; f(x)$</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="1-算法"><a href="#1-算法" class="headerlink" title="1 算法"></a>1 算法</h1><p>查查NA</p><h3 id="支持"><a href="#支持" class="headerlink" title="支持"></a>支持</h3><h2 id="2-护城河"><a href="#2-护城河" class="headerlink" title="2 护城河"></a>2 护城河</h2><pre class="line-numbers language-none"><code class="language-none">#include&lt;iostream&gt;using namespace std;int main()&#123;cout&lt;&lt;&quot;hello world&quot;&lt;&lt;endl;return 0;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p>$y &#x3D; f(x)$</p><h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><h2 id="3-1"><a href="#3-1" class="headerlink" title="3"></a>3</h2><h1 id="4"><a href="#4" class="headerlink" title="4"></a>4</h1><p>##5</p>]]></content>
       
+      
+      <categories>
+          
+          <category> suanfa </category>
+          
+      </categories>
       
       
         <tags>
             
-            <tag> 算法 </tag>
+            <tag> suanfa </tag>
+            
+            <tag> tag </tag>
             
         </tags>
       
