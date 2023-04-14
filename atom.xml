@@ -6,7 +6,7 @@
   <link href="http://tcrestart.github.io/atom.xml" rel="self"/>
   
   <link href="http://tcrestart.github.io/"/>
-  <updated>2023-04-14T03:34:09.269Z</updated>
+  <updated>2023-04-14T04:44:26.676Z</updated>
   <id>http://tcrestart.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://tcrestart.github.io/2023/04/14/off-by-one/"/>
     <id>http://tcrestart.github.io/2023/04/14/off-by-one/</id>
     <published>2023-04-14T03:32:38.000Z</published>
-    <updated>2023-04-14T03:34:09.269Z</updated>
+    <updated>2023-04-14T04:44:26.676Z</updated>
     
     
     
@@ -29,6 +29,8 @@
     <category term="ctf" scheme="http://tcrestart.github.io/categories/ctf/"/>
     
     <category term="pwn" scheme="http://tcrestart.github.io/categories/ctf/pwn/"/>
+    
+    <category term="heap" scheme="http://tcrestart.github.io/categories/ctf/pwn/heap/"/>
     
     
     <category term="ctf" scheme="http://tcrestart.github.io/tags/ctf/"/>
