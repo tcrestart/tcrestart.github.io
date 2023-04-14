@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分类, tcrestart">
+    <meta name="keywords" content="标签: heap, tcrestart">
     <meta name="description" content="tcrestart">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -28,7 +28,7 @@
 </script>
 
 
-    <title>分类 | tcrestart</title>
+    <title>标签: heap | tcrestart</title>
     <link rel="icon" type="image/jpeg" href="/g.jpg">
     
     <style>
@@ -371,8 +371,7 @@
 
 </header>
 
-    
-<div class="bg-cover pd-header about-cover">
+    <div class="bg-cover pd-header about-cover">
     <div class="container">
     <div class="row">
     <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
@@ -424,34 +423,41 @@
 
     
 
-<div id="category-cloud" class="container chip-container">
+<div id="tags" class="container chip-container">
     <div class="card">
         <div class="card-content">
             <div class="tag-title center-align">
-                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
+                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
             </div>
             <div class="tag-chips">
                 
                 
-                
-                <a href="/categories/ctf/" title="ctf: 3">
+                <a href="/tags/ctf/" title="ctf: 3">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F9EBEA;">ctf
+                            data-tagname="ctf" style="background-color: #F9EBEA;">ctf
                         <span class="tag-length">3</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/ctf/pwn/" title="pwn: 1">
+                <a href="/tags/pwn/" title="pwn: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F5EEF8;">pwn
-                        <span class="tag-length">1</span>
+                            data-tagname="pwn" style="background-color: #F5EEF8;">pwn
+                        <span class="tag-length">2</span>
                     </span>
                 </a>
                 
                 
+                <a href="/tags/heap/" title="heap: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-active "
+                            data-tagname="heap" style="background-color: #D5F5E3;">heap
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
             </div>
         </div>
     </div>
@@ -459,131 +465,51 @@
 
     
 
-    <div id="tags" class="container chip-container"style="margin-top:25px;">
-        <div class="card">
-            <div class="card-content">
-                <div class="tag-title center-align">
-                    <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
-                </div>
-                <div class="tag-chips">
-                    
-                    
-                    <a href="/tags/ctf/" title="ctf: 3">
-                        <span class="chip center-align waves-effect waves-light
-                                 chip-default "
-                                data-tagname="ctf" style="background-color: #F9EBEA;">ctf
-                            <span class="tag-length">3</span>
-                        </span>
+    <article id="articles" class="container articles">
+        <div class="row tags-posts">
+            
+            
+            <div class="article tag-post col s12 m6 l4" data-tags="ctf, pwn, heap" data-aos="fade-up">
+                <div class="card">
+                    <a href="/2023/04/14/off-by-one/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="off-by-one">
+                            
+                            <span class="card-title">off-by-one</span>
+                        </div>
                     </a>
-                    
-                    
-                    <a href="/tags/pwn/" title="pwn: 2">
-                        <span class="chip center-align waves-effect waves-light
-                                 chip-default "
-                                data-tagname="pwn" style="background-color: #F5EEF8;">pwn
-                            <span class="tag-length">2</span>
-                        </span>
-                    </a>
-                    
-                    
-                    <a href="/tags/heap/" title="heap: 1">
-                        <span class="chip center-align waves-effect waves-light
-                                 chip-default "
-                                data-tagname="heap" style="background-color: #D5F5E3;">heap
-                            <span class="tag-length">1</span>
-                        </span>
-                    </a>
-                    
+                    <div class="card-content article-content">
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-14
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/ctf/" class="post-category">
+                                ctf
+                                </a>
+                                
+                                <a href="/categories/ctf/pwn/" class="post-category">
+                                pwn
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
         </div>
-    </div>
-
-    
-    <link rel="stylesheet" type="text/css" href="/libs/jqcloud/jqcloud.css">
-<style type="text/css">
-    #tag-wordcloud {
-        width: 100%;
-        height: 300px;
-    }
-</style>
-
-<div class="container" data-aos="fade-up">
-    <div class="card">
-        <div id="tag-wordcloud" class="card-content"></div>
-    </div>
-</div>
-
-<script type="text/javascript" src="/libs/jqcloud/jqcloud-1.0.4.min.js"></script>
-<script type="text/javascript">
-    
-
-    $('#tag-wordcloud').jQCloud([{"text":"ctf","weight":3,"link":"/tags/ctf/"},{"text":"pwn","weight":2,"link":"/tags/pwn/"},{"text":"heap","weight":1,"link":"/tags/heap/"}], {
-        autoResize: true
-    });
-</script>
-
-    
-    
-    <style type="text/css">
-    #category-radar {
-        width: 100%;
-        height: 360px;
-    }
-</style>
-
-<div class="container" data-aos="fade-up">
-    <div class="card">
-        <div id="category-radar" class="card-content"></div>
-    </div>
-</div>
-
-<script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
-<script type="text/javascript">
-    let radarChart = echarts.init(document.getElementById('category-radar'));
-
-    
-
-    let option = {
-        title: {
-            left: 'center',
-            text: '文章分类雷达图',
-            textStyle: {
-                fontWeight: 500,
-                fontSize: 22
-            }
-        },
-        tooltip: {},
-        radar: {
-            name: {
-                textStyle: {
-                    color: '#3C4858'
-                }
-            },
-            indicator: [{"name":"ctf","max":4},{"name":"pwn","max":4}],
-            nameGap: 5,
-            center: ['50%','55%'],
-            radius: '66%'
-        },
-        series: [{
-            type: 'radar',
-            color: ['#3ecf8e'],
-            itemStyle: {normal: {areaStyle: {type: 'default'}}},
-            data : [
-                {
-                    value : [3,1],
-                    name : '文章分类数量'
-                }
-            ]
-        }]
-    };
-
-    radarChart.setOption(option);
-</script>
-
-    
-
+    </article>
 </main>
+
+
+
 
     <footer class="page-footer bg-color">
     

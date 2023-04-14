@@ -6,7 +6,7 @@
   <link href="http://tcrestart.github.io/atom.xml" rel="self"/>
   
   <link href="http://tcrestart.github.io/"/>
-  <updated>2023-04-13T13:55:01.053Z</updated>
+  <updated>2023-04-14T03:34:09.269Z</updated>
   <id>http://tcrestart.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>off-by-one</title>
+    <link href="http://tcrestart.github.io/2023/04/14/off-by-one/"/>
+    <id>http://tcrestart.github.io/2023/04/14/off-by-one/</id>
+    <published>2023-04-14T03:32:38.000Z</published>
+    <updated>2023-04-14T03:34:09.269Z</updated>
+    
+    
+    
+    
+    <category term="ctf" scheme="http://tcrestart.github.io/categories/ctf/"/>
+    
+    <category term="pwn" scheme="http://tcrestart.github.io/categories/ctf/pwn/"/>
+    
+    
+    <category term="ctf" scheme="http://tcrestart.github.io/tags/ctf/"/>
+    
+    <category term="pwn" scheme="http://tcrestart.github.io/tags/pwn/"/>
+    
+    <category term="heap" scheme="http://tcrestart.github.io/tags/heap/"/>
+    
+  </entry>
+  
+  <entry>
     <title>绕过NX</title>
     <link href="http://tcrestart.github.io/2023/04/13/rao-guo-nx/"/>
     <id>http://tcrestart.github.io/2023/04/13/rao-guo-nx/</id>
     <published>2023-04-13T10:51:31.000Z</published>
-    <updated>2023-04-13T13:55:01.053Z</updated>
+    <updated>2023-04-14T04:10:19.479Z</updated>
     
     
       

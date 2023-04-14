@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>off-by-one</title>
+      <link href="/2023/04/14/off-by-one/"/>
+      <url>/2023/04/14/off-by-one/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> ctf </category>
+          
+          <category> pwn </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ctf </tag>
+            
+            <tag> pwn </tag>
+            
+            <tag> heap </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>绕过NX</title>
       <link href="/2023/04/13/rao-guo-nx/"/>
       <url>/2023/04/13/rao-guo-nx/</url>
