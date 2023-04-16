@@ -6,7 +6,7 @@
   <link href="http://tcrestart.github.io/atom.xml" rel="self"/>
   
   <link href="http://tcrestart.github.io/"/>
-  <updated>2023-04-14T04:44:26.676Z</updated>
+  <updated>2023-04-16T11:53:36.031Z</updated>
   <id>http://tcrestart.github.io/</id>
   
   <author>
@@ -17,20 +17,62 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>off-by-one</title>
-    <link href="http://tcrestart.github.io/2023/04/14/off-by-one/"/>
-    <id>http://tcrestart.github.io/2023/04/14/off-by-one/</id>
-    <published>2023-04-14T03:32:38.000Z</published>
-    <updated>2023-04-14T04:44:26.676Z</updated>
+    <title>linux动态链接</title>
+    <link href="http://tcrestart.github.io/2023/04/16/linux-dong-tai-lian-jie/"/>
+    <id>http://tcrestart.github.io/2023/04/16/linux-dong-tai-lian-jie/</id>
+    <published>2023-04-16T10:19:45.000Z</published>
+    <updated>2023-04-16T11:53:36.031Z</updated>
     
+    
+    
+    
+    <category term="Linux" scheme="http://tcrestart.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux动态链接" scheme="http://tcrestart.github.io/tags/Linux%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>XDCTF2015-pwn200</title>
+    <link href="http://tcrestart.github.io/2023/04/16/xdctf2015-pwn200/"/>
+    <id>http://tcrestart.github.io/2023/04/16/xdctf2015-pwn200/</id>
+    <published>2023-04-16T10:07:04.000Z</published>
+    <updated>2023-04-16T12:00:37.912Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一-DynELF方法&quot;&gt;&lt;a href=&quot;#一-DynELF方法&quot; class=&quot;headerlink&quot; title=&quot;一.DynELF方法&quot;&gt;&lt;/a&gt;一.DynELF方法&lt;/h1&gt;&lt;p&gt;具体参考：&lt;br&gt;&lt;a</summary>
+        
+      
     
     
     
     <category term="ctf" scheme="http://tcrestart.github.io/categories/ctf/"/>
     
-    <category term="pwn" scheme="http://tcrestart.github.io/categories/ctf/pwn/"/>
     
-    <category term="heap" scheme="http://tcrestart.github.io/categories/ctf/pwn/heap/"/>
+    <category term="ctf" scheme="http://tcrestart.github.io/tags/ctf/"/>
+    
+    <category term="pwn" scheme="http://tcrestart.github.io/tags/pwn/"/>
+    
+    <category term="writeup" scheme="http://tcrestart.github.io/tags/writeup/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>off-by-one</title>
+    <link href="http://tcrestart.github.io/2023/04/14/off-by-one/"/>
+    <id>http://tcrestart.github.io/2023/04/14/off-by-one/</id>
+    <published>2023-04-14T03:32:38.000Z</published>
+    <updated>2023-04-16T11:50:48.617Z</updated>
+    
+    
+    
+    
+    <category term="ctf" scheme="http://tcrestart.github.io/categories/ctf/"/>
     
     
     <category term="ctf" scheme="http://tcrestart.github.io/tags/ctf/"/>
