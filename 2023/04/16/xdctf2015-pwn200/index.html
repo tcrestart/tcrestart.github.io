@@ -104,17 +104,6 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/categories" class="waves-effect waves-light">
       
       <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
@@ -215,17 +204,6 @@
 			    <i class="fa-fw fas fa-home"></i>
 			
 			首页
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
 		</a>
           
         </li>
@@ -418,6 +396,14 @@
                                 <span class="chip bg-color">writeup</span>
                             </a>
                         
+                            <a href="/tags/DynELF/">
+                                <span class="chip bg-color">DynELF</span>
+                            </a>
+                        
+                            <a href="/tags/ret2-dl-runtime-resolve/">
+                                <span class="chip bg-color">ret2_dl_runtime_resolve</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -446,7 +432,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-16
+                    2023-04-17
                 </div>
                 
 
@@ -587,8 +573,7 @@ function_libc &#x3D; d.lookup(&#39;function&#39;,&#39;libc&#39;)
     return data
 #当然，配合puts也是可以的（puts和write就只有接收部分不同）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><em><strong>补充：万能pop模板</strong></em></p>
-<p>当程序的常规gadgets不能满足需求时（通常是缺少“pop_rdx”），就需要万能pop<br>如果用csu进行寄存器赋值，需要两个重要的ROPgadgets：</p>
+<h4 id="1-3-4-补充：万能pop模板"><a href="#1-3-4-补充：万能pop模板" class="headerlink" title="1.3.4 补充：万能pop模板"></a>1.3.4 补充：万能pop模板</h4><p>当程序的常规gadgets不能满足需求时（通常是缺少“pop_rdx”），就需要万能pop<br>如果用csu进行寄存器赋值，需要两个重要的ROPgadgets：</p>
 <p>csu_front_addr:<br><img src="https://ywhkkx.github.io/2022/01/02/%E5%90%84%E7%A7%8D%E6%A8%A1%E6%9D%BF/1641126255915-1642995722008-1647496563602.png"><br>csu_end_addr:<br><img src="https://ywhkkx.github.io/2022/01/02/%E5%90%84%E7%A7%8D%E6%A8%A1%E6%9D%BF/1641126386447-1642995722010-1647496563602.png"></p>
 <p><code>不同的程序csu可能不同（寄存器顺序不同），一定要确认并修改</code></p>
 <pre class="line-numbers language-none"><code class="language-none">csu_front_addr&#x3D;
@@ -736,6 +721,14 @@ p.interactive()<span aria-hidden="true" class="line-numbers-rows"><span></span><
                             
                                 <a href="/tags/writeup/">
                                     <span class="chip bg-color">writeup</span>
+                                </a>
+                            
+                                <a href="/tags/DynELF/">
+                                    <span class="chip bg-color">DynELF</span>
+                                </a>
+                            
+                                <a href="/tags/ret2-dl-runtime-resolve/">
+                                    <span class="chip bg-color">ret2_dl_runtime_resolve</span>
                                 </a>
                             
                         </div>
