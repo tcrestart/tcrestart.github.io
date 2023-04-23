@@ -4,11 +4,65 @@
   
     
     <entry>
+      <title>Hook</title>
+      <link href="/2023/04/18/hook/"/>
+      <url>/2023/04/18/hook/</url>
+      
+        <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Hook直意为钩子又叫做回调函数，是一种特殊的消息处理机制，它可以监视系统或者进程中的各种事件消息，截获发往目标窗口的消息并进行处理</p><p>在程序中设置钩子，用来在<code>malloc</code>， <code>realloc</code>，<code>free</code>的时候，对其进行检查，可以看到对应的函数调用后的地址是什么</p><p>原理：</p><p>函数的指针可以指向不同的函数，从而完成不同的功能</p><p>设计理念：</p><p>我们在写main函数的时候，可能还不知道它会完成什么功能，这时候留下函数指针作为接口，可以挂上不同的函数完成不同的功能，究竟执行什么功能由钩子函数的编写者完成</p><p>案例：</p><pre class="line-numbers language-none"><code class="language-none">#include &quot;stdio.h&quot; void fun1(void)&#123;    printf(&quot;i am fun1\r\n&quot;);&#125; void fun2(void)&#123;    printf(&quot;i am fun2\r\n&quot;);&#125; int main(int argc, char const *argv[])&#123;    void (* fun)(void); &#x2F;&#x2F;定义一个函数指针      fun &#x3D; fun1;&#x2F;&#x2F; 让fun指向fun1（首地址）    fun();&#x2F;&#x2F; 执行fun        fun &#x3D; fun2;   &#x2F;&#x2F; 让fun指向fun2（首地址）    fun(); &#x2F;&#x2F; 执行fun     return 0;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>结果：<br><img src="https://ywhkkx.github.io/2021/12/12/%E5%A0%86%E6%BA%A2%E5%87%BA+malloc_hook%E5%8A%AB%E6%8C%81/1638893957283-1639312427470.png"></p><p>这里的函数“fun1”和函数“fun2”就是hook</p><p>把函数指针fun指向fun1和fun2的过程称为“挂钩子”</p><p>​ &#x2F;&#x2F; 在嵌入式系统中，底层不知道应用层需要完成什么功能， 往往会提供像这样子的函数回调方式供应用层使用</p><h2 id="malloc-hook"><a href="#malloc-hook" class="headerlink" title="malloc_hook"></a>malloc_hook</h2><p>malloc_hook本质上讲是一个指针变量，指向一个“检查函数”</p><blockquote><p>void * function(size_t size, void * caller)<br>​ &#x2F;&#x2F;其中caller是表示在栈中调用malloc的函数的时候的函数地址，%p可以打印出它的地址</p></blockquote><p>在执行malloc时，会检测__malloc_hook的值，如果malloc_hook的值存在（已经挂钩），将调用malloc_hook指向的call rax的地址（malloc调用之后的地址）</p><p>简单来说：执行malloc时，malloc_hook也会执行</p><p>案例：</p><pre class="line-numbers language-none"><code class="language-none">#include &lt;stdio.h&gt;#include &lt;malloc.h&gt;void *fun() &#123;    __malloc_hook &#x3D; NULL;    printf(&quot;hello,fun was called!\n&quot;);    return NULL;&#125;int main() &#123;    __malloc_hook &#x3D; fun;    malloc(10);&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>malloc_hook指向了fun的首地址（挂钩子）</p><p>程序在执行malloc时就会执行fun，而不是“检查函数”（钩子已切换）</p><p>利用：</p><p>malloc_hook位于main_arena上方0x10的位置，可以通过fake chunk来overwrite该值实现getshell<br><a href="https://ywhkkx.github.io/2021/12/12/%E5%A0%86%E6%BA%A2%E5%87%BA+malloc_hook%E5%8A%AB%E6%8C%81/">上面参考yhellow</a><br><a href="https://blog.csdn.net/A951860555/article/details/115462494">详参</a></p><h2 id="free-hook"><a href="#free-hook" class="headerlink" title="free_hook"></a>free_hook</h2><p><a href="https://blog.csdn.net/A951860555/article/details/115766826">https://blog.csdn.net/A951860555/article/details/115766826</a></p><h2 id="Hook函数劫持应用"><a href="#Hook函数劫持应用" class="headerlink" title="Hook函数劫持应用"></a>Hook函数劫持应用</h2><p><a href="https://forum.butian.net/share/437">pwn时劫持通过劫持各种hook从而劫持程序控制流的技巧</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> ctf </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ctf </tag>
+            
+            <tag> Hook </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>零碎知识点</title>
+      <link href="/2023/04/18/ling-sui-zhi-shi-dian/"/>
+      <url>/2023/04/18/ling-sui-zhi-shi-dian/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目防护措施"><a href="#题目防护措施" class="headerlink" title="题目防护措施"></a>题目防护措施</h2><h3 id="RELRO（重定位只读）"><a href="#RELRO（重定位只读）" class="headerlink" title="RELRO（重定位只读）"></a>RELRO（重定位只读）</h3><p><code>主要针对 GOT 改写的攻击方式</code></p><p>分为Partial RELRO 和 Full RELRO 两种</p><ul><li><p>Partial RELRO:在程序装入后，将其中一段 (如.dynamic) 标记为只读，防止程序的一些重定位信息被修改</p></li><li><p>Full RELRO: 在Partial RELRO的基础上，在程序装入时，直接解析完所有符号并填入对应的值，此时所有的 GOT 表项都已初始化，且不装入 link_map 与_dl_runtime_resolve 的地址 (二者都是程序动态装载的重要结构和函数)。</p></li></ul><p>设置符号重定向表格为只读或在程序启动时就解析并绑定所有动态符号，从而减少对 GOT（Global Offset Table）攻击。RELRO 为” Partial RELRO”, 说明我们对 GOT 表具有写权限。</p><p><a href="https://lantern.cool/note-pwn-linux-protect/">参考</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> ctf </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ctf </tag>
+            
+            <tag> pwn </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux动态链接</title>
       <link href="/2023/04/16/linux-dong-tai-lian-jie/"/>
       <url>/2023/04/16/linux-dong-tai-lian-jie/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h2 id="plt-amp-got"><a href="#plt-amp-got" class="headerlink" title="plt&amp;got"></a>plt&amp;got</h2><p><a href="https://blog.csdn.net/linyt/category_6267121.html">参考</a></p>]]></content>
       
       
       <categories>

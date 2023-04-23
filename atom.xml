@@ -6,7 +6,7 @@
   <link href="http://tcrestart.github.io/atom.xml" rel="self"/>
   
   <link href="http://tcrestart.github.io/"/>
-  <updated>2023-04-17T10:31:26.537Z</updated>
+  <updated>2023-04-18T13:13:35.310Z</updated>
   <id>http://tcrestart.github.io/</id>
   
   <author>
@@ -17,12 +17,74 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Hook</title>
+    <link href="http://tcrestart.github.io/2023/04/18/hook/"/>
+    <id>http://tcrestart.github.io/2023/04/18/hook/</id>
+    <published>2023-04-18T13:05:55.000Z</published>
+    <updated>2023-04-18T13:13:35.310Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="ctf" scheme="http://tcrestart.github.io/categories/ctf/"/>
+    
+    
+    <category term="ctf" scheme="http://tcrestart.github.io/tags/ctf/"/>
+    
+    <category term="Hook" scheme="http://tcrestart.github.io/tags/Hook/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>零碎知识点</title>
+    <link href="http://tcrestart.github.io/2023/04/18/ling-sui-zhi-shi-dian/"/>
+    <id>http://tcrestart.github.io/2023/04/18/ling-sui-zhi-shi-dian/</id>
+    <published>2023-04-18T12:40:01.000Z</published>
+    <updated>2023-04-18T13:06:46.231Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;题目防护措施&quot;&gt;&lt;a href=&quot;#题目防护措施&quot; class=&quot;headerlink&quot; title=&quot;题目防护措施&quot;&gt;&lt;/a&gt;题目防护措施&lt;/h2&gt;&lt;h3 id=&quot;RELRO（重定位只读）&quot;&gt;&lt;a href=&quot;#RELRO（重定位只读）&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="ctf" scheme="http://tcrestart.github.io/categories/ctf/"/>
+    
+    
+    <category term="ctf" scheme="http://tcrestart.github.io/tags/ctf/"/>
+    
+    <category term="pwn" scheme="http://tcrestart.github.io/tags/pwn/"/>
+    
+  </entry>
+  
+  <entry>
     <title>linux动态链接</title>
     <link href="http://tcrestart.github.io/2023/04/16/linux-dong-tai-lian-jie/"/>
     <id>http://tcrestart.github.io/2023/04/16/linux-dong-tai-lian-jie/</id>
     <published>2023-04-16T10:19:45.000Z</published>
-    <updated>2023-04-17T10:31:26.537Z</updated>
+    <updated>2023-04-19T05:02:04.262Z</updated>
     
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;plt-amp-got&quot;&gt;&lt;a href=&quot;#plt-amp-got&quot; class=&quot;headerlink&quot; title=&quot;plt&amp;amp;got&quot;&gt;&lt;/a&gt;plt&amp;amp;got&lt;/h2&gt;&lt;p&gt;&lt;a</summary>
+        
+      
     
     
     
