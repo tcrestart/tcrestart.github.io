@@ -6,7 +6,7 @@
   <link href="http://tcrestart.github.io/atom.xml" rel="self"/>
   
   <link href="http://tcrestart.github.io/"/>
-  <updated>2023-04-18T13:13:35.310Z</updated>
+  <updated>2023-05-07T09:12:59.732Z</updated>
   <id>http://tcrestart.github.io/</id>
   
   <author>
@@ -15,6 +15,199 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>awesome resources</title>
+    <link href="http://tcrestart.github.io/2023/05/07/awesome-resources/"/>
+    <id>http://tcrestart.github.io/2023/05/07/awesome-resources/</id>
+    <published>2023-05-07T09:09:00.000Z</published>
+    <updated>2023-05-07T09:12:59.732Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Coding Horror ，这是杰夫·阿特伍德（Jeff Atwood）于 2004 年创办的博客，记录其在软件开发经历中的所思所想、点点滴滴。时至今日，该博客每天都有近 10</summary>
+        
+      
+    
+    
+    
+    <category term="resource" scheme="http://tcrestart.github.io/categories/resource/"/>
+    
+    
+    <category term="resource" scheme="http://tcrestart.github.io/tags/resource/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++后端开发(拓展篇)</title>
+    <link href="http://tcrestart.github.io/2023/04/29/c-hou-duan-kai-fa-tuo-zhan-pian/"/>
+    <id>http://tcrestart.github.io/2023/04/29/c-hou-duan-kai-fa-tuo-zhan-pian/</id>
+    <published>2023-04-29T02:13:15.000Z</published>
+    <updated>2023-04-29T03:02:04.723Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-设计模式&quot;&gt;&lt;a href=&quot;#1-设计模式&quot; class=&quot;headerlink&quot; title=&quot;1.设计模式&quot;&gt;&lt;/a&gt;1.设计模式&lt;/h2&gt;&lt;h3 id=&quot;1-1-单例模式&quot;&gt;&lt;a href=&quot;#1-1-单例模式&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="C++后端开发" scheme="http://tcrestart.github.io/categories/C-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+    <category term="sql" scheme="http://tcrestart.github.io/tags/sql/"/>
+    
+    <category term="设计模式" scheme="http://tcrestart.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    <category term="网络安全" scheme="http://tcrestart.github.io/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="CPU" scheme="http://tcrestart.github.io/tags/CPU/"/>
+    
+    <category term="IO" scheme="http://tcrestart.github.io/tags/IO/"/>
+    
+    <category term="Redis" scheme="http://tcrestart.github.io/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++后端开发(进阶篇)</title>
+    <link href="http://tcrestart.github.io/2023/04/29/c-hou-duan-kai-fa-jin-jie-pian/"/>
+    <id>http://tcrestart.github.io/2023/04/29/c-hou-duan-kai-fa-jin-jie-pian/</id>
+    <published>2023-04-29T02:12:53.000Z</published>
+    <updated>2023-05-02T14:16:11.221Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-操作系统基础&quot;&gt;&lt;a href=&quot;#1-操作系统基础&quot; class=&quot;headerlink&quot; title=&quot;1.操作系统基础&quot;&gt;&lt;/a&gt;1.操作系统基础&lt;/h2&gt;&lt;h3 id=&quot;1-1进程与线程&quot;&gt;&lt;a href=&quot;#1-1进程与线程&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="C++后端开发" scheme="http://tcrestart.github.io/categories/C-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+    <category term="计网" scheme="http://tcrestart.github.io/tags/%E8%AE%A1%E7%BD%91/"/>
+    
+    <category term="数据结构和算法" scheme="http://tcrestart.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="OS" scheme="http://tcrestart.github.io/tags/OS/"/>
+    
+    <category term="C++" scheme="http://tcrestart.github.io/tags/C/"/>
+    
+    <category term="debug" scheme="http://tcrestart.github.io/tags/debug/"/>
+    
+    <category term="网络编程" scheme="http://tcrestart.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="进程/线程" scheme="http://tcrestart.github.io/tags/%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B/"/>
+    
+    <category term="RPC" scheme="http://tcrestart.github.io/tags/RPC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++后端开发(基础篇)</title>
+    <link href="http://tcrestart.github.io/2023/04/29/c-hou-duan-kai-fa-ji-chu-pian/"/>
+    <id>http://tcrestart.github.io/2023/04/29/c-hou-duan-kai-fa-ji-chu-pian/</id>
+    <published>2023-04-29T02:12:26.000Z</published>
+    <updated>2023-04-29T03:26:09.502Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-计算机体系架构基础&quot;&gt;&lt;a href=&quot;#1-计算机体系架构基础&quot; class=&quot;headerlink&quot; title=&quot;1.计算机体系架构基础&quot;&gt;&lt;/a&gt;1.计算机体系架构基础&lt;/h2&gt;&lt;h3 id=&quot;1-1-图灵机&quot;&gt;&lt;a href=&quot;#1-1-图灵机&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="C++后端开发" scheme="http://tcrestart.github.io/categories/C-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+    <category term="C/C++" scheme="http://tcrestart.github.io/tags/C-C/"/>
+    
+    <category term="计网" scheme="http://tcrestart.github.io/tags/%E8%AE%A1%E7%BD%91/"/>
+    
+    <category term="编译原理" scheme="http://tcrestart.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    
+    <category term="sql" scheme="http://tcrestart.github.io/tags/sql/"/>
+    
+    <category term="数据结构和算法" scheme="http://tcrestart.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="linux" scheme="http://tcrestart.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>unlink</title>
+    <link href="http://tcrestart.github.io/2023/04/25/unlink/"/>
+    <id>http://tcrestart.github.io/2023/04/25/unlink/</id>
+    <published>2023-04-25T13:53:52.000Z</published>
+    <updated>2023-04-25T13:54:45.636Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;pre class=&quot;line-numbers language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;#coding:utf-8
+from pwn import</summary>
+        
+      
+    
+    
+    
+    <category term="ctf" scheme="http://tcrestart.github.io/categories/ctf/"/>
+    
+    
+    <category term="ctf" scheme="http://tcrestart.github.io/tags/ctf/"/>
+    
+    <category term="pwn" scheme="http://tcrestart.github.io/tags/pwn/"/>
+    
+    <category term="unlink" scheme="http://tcrestart.github.io/tags/unlink/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>canary</title>
+    <link href="http://tcrestart.github.io/2023/04/25/canary/"/>
+    <id>http://tcrestart.github.io/2023/04/25/canary/</id>
+    <published>2023-04-25T12:10:07.000Z</published>
+    <updated>2023-04-26T14:14:27.815Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-canary保护&quot;&gt;&lt;a href=&quot;#1-canary保护&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="ctf" scheme="http://tcrestart.github.io/categories/ctf/"/>
+    
+    
+    <category term="ctf" scheme="http://tcrestart.github.io/tags/ctf/"/>
+    
+    <category term="pwn" scheme="http://tcrestart.github.io/tags/pwn/"/>
+    
+    <category term="canary" scheme="http://tcrestart.github.io/tags/canary/"/>
+    
+  </entry>
   
   <entry>
     <title>Hook</title>
@@ -48,7 +241,7 @@
     <link href="http://tcrestart.github.io/2023/04/18/ling-sui-zhi-shi-dian/"/>
     <id>http://tcrestart.github.io/2023/04/18/ling-sui-zhi-shi-dian/</id>
     <published>2023-04-18T12:40:01.000Z</published>
-    <updated>2023-04-18T13:06:46.231Z</updated>
+    <updated>2023-04-25T09:20:05.319Z</updated>
     
     
       
@@ -100,7 +293,7 @@
     <link href="http://tcrestart.github.io/2023/04/16/xdctf2015-pwn200/"/>
     <id>http://tcrestart.github.io/2023/04/16/xdctf2015-pwn200/</id>
     <published>2023-04-16T10:07:04.000Z</published>
-    <updated>2023-04-17T09:24:53.275Z</updated>
+    <updated>2023-04-25T08:40:26.442Z</updated>
     
     
       

