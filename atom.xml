@@ -6,7 +6,7 @@
   <link href="http://tcrestart.github.io/atom.xml" rel="self"/>
   
   <link href="http://tcrestart.github.io/"/>
-  <updated>2023-05-07T09:12:59.732Z</updated>
+  <updated>2023-09-21T05:19:31.353Z</updated>
   <id>http://tcrestart.github.io/</id>
   
   <author>
@@ -15,6 +15,19 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ics2022</title>
+    <link href="http://tcrestart.github.io/2023/09/21/ics2022/"/>
+    <id>http://tcrestart.github.io/2023/09/21/ics2022/</id>
+    <published>2023-09-21T05:19:31.000Z</published>
+    <updated>2023-09-21T05:19:31.353Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>awesome resources</title>
