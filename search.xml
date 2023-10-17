@@ -8,9 +8,15 @@
       <link href="/2023/09/21/ics2022/"/>
       <url>/2023/09/21/ics2022/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h2 id="pa1"><a href="#pa1" class="headerlink" title="pa1"></a>pa1</h2><h3 id="问题：16进制打印"><a href="#问题：16进制打印" class="headerlink" title="问题：16进制打印"></a>问题：16进制打印</h3><p>使用strstr()解决</p><pre class="line-numbers language-none"><code class="language-none">static word_t eval_operand(int p) &#123;  if(tokens[p].type &#x3D;&#x3D; TK_INT) &#123;    if(strstr(tokens[p].str, &quot;0x&quot;) !&#x3D; NULL) &#123;      return strtol(tokens[p].str + 2, NULL, 16);    &#125; else &#123;      &#x2F;&#x2F;return atoi(tokens[p].str);      return strtol(tokens[p].str, NULL, 10);    &#125;  &#125; else if(tokens[p].type &#x3D;&#x3D; TK_REG) &#123;    bool ok &#x3D; false;    word_t res;    res &#x3D; isa_reg_str2val(tokens[p].str, &amp;ok);    if(ok &#x3D;&#x3D; true) &#123;      return res;    &#125;  &#125;  return 0;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="表达式形如“-2-3-”无法实现"><a href="#表达式形如“-2-3-”无法实现" class="headerlink" title="表达式形如“-(2+3)”无法实现"></a>表达式形如“-(2+3)”无法实现</h3><p>未解决</p><h2 id="pa2"><a href="#pa2" class="headerlink" title="pa2"></a>pa2</h2>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> nemu </tag>
+            
+        </tags>
       
     </entry>
     

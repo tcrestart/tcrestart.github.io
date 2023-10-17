@@ -5,7 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="ics2022, tcrestart">
-    <meta name="description" content="">
+    <meta name="description" content="pa1问题：16进制打印使用strstr()解决
+static word_t eval_operand(int p) &amp;#123;
+  if(tokens[p].type &amp;#x3D;&amp;#x3D; TK_INT) &amp;#123;
+    if">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -360,9 +363,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/nemu/">
+                                <span class="chip bg-color">nemu</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -381,14 +388,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-09-21
+                    2023-10-01
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    115
                 </div>
                 
 
@@ -413,7 +420,29 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="pa1"><a href="#pa1" class="headerlink" title="pa1"></a>pa1</h2><h3 id="问题：16进制打印"><a href="#问题：16进制打印" class="headerlink" title="问题：16进制打印"></a>问题：16进制打印</h3><p>使用strstr()解决</p>
+<pre class="line-numbers language-none"><code class="language-none">static word_t eval_operand(int p) &#123;
+  if(tokens[p].type &#x3D;&#x3D; TK_INT) &#123;
+    if(strstr(tokens[p].str, &quot;0x&quot;) !&#x3D; NULL) &#123;
+      return strtol(tokens[p].str + 2, NULL, 16);
+    &#125; else &#123;
+      &#x2F;&#x2F;return atoi(tokens[p].str);
+      return strtol(tokens[p].str, NULL, 10);
+    &#125;
+  &#125; else if(tokens[p].type &#x3D;&#x3D; TK_REG) &#123;
+    bool ok &#x3D; false;
+    word_t res;
+    res &#x3D; isa_reg_str2val(tokens[p].str, &amp;ok);
+    if(ok &#x3D;&#x3D; true) &#123;
+      return res;
+    &#125;
+  &#125;
+  return 0;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="表达式形如“-2-3-”无法实现"><a href="#表达式形如“-2-3-”无法实现" class="headerlink" title="表达式形如“-(2+3)”无法实现"></a>表达式形如“-(2+3)”无法实现</h3><p>未解决</p>
+<h2 id="pa2"><a href="#pa2" class="headerlink" title="pa2"></a>pa2</h2>
                 
             </div>
             <hr/>
@@ -476,7 +505,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/nemu/">
+                                    <span class="chip bg-color">nemu</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -553,6 +586,14 @@
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/nemu/">
+                        <span class="chip bg-color">nemu</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -798,7 +839,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">13.5k</span>
+                        class="white-color">13.6k</span>
             
             
             
